@@ -23,13 +23,14 @@ class ShoppingCart extends React.Component {
                 <div class="item">
                     <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
                     <p style={pStyle}>Shopping Cart: 0 items</p>
-                    {/* <p style={pStyle}>0 items</p> */}
                 </div>
-                <div class="ui divider"></div>
-                <ShoppingCartItem />
-                {/* <a class="item">Features</a>
-                <a class="item">Testimonials</a>
-                <a class="item">Sign-in</a> */}
+                {/* this is the part that needs to be mapped */}
+                <div class="item">
+                    <ShoppingCartItem />
+                </div>
+                <div class="item">
+                    <h3>Total: $20</h3>
+                </div>
             </div>
         )
     }

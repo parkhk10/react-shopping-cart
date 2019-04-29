@@ -29,18 +29,22 @@ const buttonStyle = {
     marginRight: '1em'
 }
 
+const wrapperStyle = {
+    height: '62px'
+}
+
 class ShoppingCartItem extends React.Component {
     render() {
         return(
-            <div>
+            <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>
                     <img src="./data/products/12064273040195392_2.jpg" style={iconStyle} class="ui mini image"/> 
                     <div style={textWrapStyle}>
                         <p style={pStyle}>Name of shirt</p>
                         <br/>
-                        <p style={pStyle}>Quantity: 2 x $20</p>
+                        <p style={pStyle}>Size</p>
                         <br/>
-                        <p style={priceStyle}><b>$40</b></p>
+                        <p style={priceStyle}>2 x $10 = <b>$20</b></p>
                     </div>
                 </div>
                 <div style={buttonStyle}>
