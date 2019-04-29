@@ -1,6 +1,6 @@
 import React from 'react'
 import ShoppingCartItem from './ShoppingCartItem'
-import { List, Segment } from 'semantic-ui-react'
+import { Icon, Menu, Sidebar } from 'semantic-ui-react'
 
 const iconStyle = {
     display: 'inline-block'
@@ -13,53 +13,75 @@ const pStyle = {
 }
 
 const menuBarStyle = {
-    width: '20em'
+    width: '25em'
 }
+// ui right fixed vertical menu
+
+// class ShoppingCart extends React.Component {
+//     render() {
+//         return(
+//             <div style={menuBarStyle} class="ui sidebar right fixed vertical menu"> 
+//                 <div class="item">
+//                     <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
+//                     <p style={pStyle}>Shopping Cart: 0 items</p>
+//                 </div>
+//                 {/* this is the part that needs to be mapped */}
+//                 <div class="item">
+//                     <ShoppingCartItem />
+//                 </div>
+//                 <div class="item">
+//                     <h3>Total: $20</h3>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 class ShoppingCart extends React.Component {
+    constructor(props) {
+        super(props)
+        // this.cartItems = this.props.cart.map(
+        //     item => <ShoppingCartItem cartItemTitle={item.title}
+        //                             cartItemSize={item.size}
+        //                             cartItemPrice={item.price}
+        //                             cartItemImg={item.img} 
+        //             />
+        //     );
+        this.cartItems = <p>HI!!!!!</p>
+      };
+
     render() {
         return(
-            <div style={menuBarStyle} class="ui right fixed vertical menu">
+            <Sidebar
+                style={menuBarStyle}
+                visible= {this.props.visible}
+                as={Menu}
+                animation='overlay'
+                direction='right'
+                icon='labeled'
+                inverted
+                vertical
+                width='thin'
+            >
                 <div class="item">
-                    <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
-                    <p style={pStyle}>Shopping Cart: 0 items</p>
-                </div>
-                {/* this is the part that needs to be mapped */}
-                <div class="item">
-                    <ShoppingCartItem />
-                </div>
-                <div class="item">
-                    <h3>Total: $20</h3>
-                </div>
-            </div>
+                     <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
+                     <p style={pStyle}>Shopping Cart: 0 items</p>
+                 </div>
+                 {/* this is the part that needs to be mapped */}
+                 <div>{this.cartItems}</div>
+                 {/* <div class="item">
+                     <ShoppingCartItem cartItemTitle={this.props.cartItemTitle}
+                                        cartItemSize={this.props.cartItemSize}
+                                        cartItemPrice={this.props.cartItemPrice}
+                                        cartItemImg={this.props.cartItemImg} 
+                      />
+                 </div> */}
+                 <div class="item">
+                     <h3>Total: $20</h3>
+                 </div>
+            </Sidebar>
         )
     }
 }
-
-// const ShoppingCart = () => (
-    
-// //   <Segment inverted>
-// //     <List divided inverted relaxed>
-// //       <List.Item>
-// //         <List.Content>
-// //           <List.Header>Snickerdoodle</List.Header>
-// //           An excellent companion
-// //         </List.Content>
-// //       </List.Item>
-// //       <List.Item>
-// //         <List.Content>
-// //           <List.Header>Poodle</List.Header>
-// //           A poodle, its pretty basic
-// //         </List.Content>
-// //       </List.Item>
-// //       <List.Item>
-// //         <List.Content>
-// //           <List.Header>Paulo</List.Header>
-// //           He's also a dog
-// //         </List.Content>
-// //       </List.Item>
-// //     </List>
-// //   </Segment>
-// )
 
 export default ShoppingCart;

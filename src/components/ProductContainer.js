@@ -11,17 +11,20 @@ class ProductContainer extends React.Component {
 
     createSizeButtons = () => {
         return(
-            this.props.productSizes.map(size => <button class="ui inverted violet button">{size}</button>)
+            this.props.productInfo.availableSizes.map(size => <button class="ui inverted violet button" 
+                                                        onClick={() => this.props.handleAddToCart(this.props.productInfo, size)}>{size}
+                                                </button>
+            )
         )
     }
 
     render() {
         return(
             <div style={container}>
-                <img src={"./data/products/" + this.props.productImg + "_1.jpg"} />
-                <h3>{this.props.productTitle}</h3>
-                <p>{this.props.productDesc}</p>
-                <p>${this.props.productPrice}</p>
+                <img src={"./data/products/" + this.props.productInfo.sku + "_1.jpg"} />
+                <h3>{this.props.productInfo.title}</h3>
+                <p>{this.props.productInfo.description}</p>
+                <p>${this.props.productInfo.price}</p>
                 <div>{this.createSizeButtons()}</div>
                 {/* <button class="ui inverted teal button">Add to Cart</button> */}
                 <br />

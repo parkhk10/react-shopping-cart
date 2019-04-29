@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductContainer from './components/ProductContainer'
 import ShoppingCart from './components/ShoppingCart'
 
@@ -22,25 +22,71 @@ const productsStyle ={
 }
 
 const App = ({products}) => {
+
+  const [menuVisibility, toggleMenu] = useState(false); //TODO!!!!!!!
+  const [selectedTitle, setTitle] = useState("");
+  const [selectedSize, setSize] = useState("");
+  const [selectedPrice, setPrice] = useState("");
+  const [selectedImg, setImg] = useState("");
+  const [cart, setCart] = useState([]);
+
+  const handleAddToCart = (selectedProdInfo, size) => {
+    console.log("selected prod info" + selectedProdInfo)
+    // need to make cart open and add a ShoppingCartItem with the right details
+    setTitle(selectedProdInfo.title)
+    setSize(size)
+    setPrice(selectedProdInfo.price)
+    setImg(selectedProdInfo.sku)
+    callSetCart()
+    // setCart([...cart,
+    //           {
+    //             title : selectedTitle, 
+    //             size : selectedSize,
+    //             price : selectedPrice,
+    //             img : selectedImg
+    //           }
+    //         ]);
+    console.log(cart)
+  }
+
+  const callSetCart = () => {
+    setTimeout(5000)
+    setCart([...cart,
+      {
+        title : selectedTitle, 
+        size : selectedSize,
+        price : selectedPrice,
+        img : selectedImg
+      }
+    ]);
+    console.log(cart)
+
+  };
+
+  
   const skus = Object.keys(products);
   const items = skus.map(
     sku => <ProductContainer 
-              productImg={products[sku].sku} 
-              productTitle={products[sku].title} 
-              productDesc={products[sku].description}
-              productPrice={products[sku].price} 
-              productSizes={products[sku].availableSizes}
+              productInfo={products[sku]}
+              handleAddToCart={handleAddToCart.bind(this)}
             />
     );
 
   return(
     <div style={mainPageStyle}>
       <h1 style={titleStyle}>Sick Tees Co.</h1>
-      <div style={cartStyle}><ShoppingCart /></div>
+      <button onClick={() => toggleMenu(!menuVisibility)}>shopping cart</button> 
+      <div style={cartStyle}>
+        <ShoppingCart cartItemTitle={selectedTitle}
+                      cartItemSize={selectedSize}
+                      cartItemPrice={selectedPrice}
+                      cartItemImg={selectedImg} 
+                      cart={cart}
+                      visible={menuVisibility}
+        />
+      </div>
       <div style={productsStyle} class="ui grid">{items}</div>
     </div>
-    // <ProductContainer productTitle={items} />
-  // <ul>{items}</ul>
   )
 };
 

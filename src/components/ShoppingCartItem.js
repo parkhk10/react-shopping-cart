@@ -21,7 +21,7 @@ const priceStyle = {
 
 const prodDetailWrapperStyle = {
     float: 'left',
-    marginLeft: '1em'
+    marginLeft: '0em'
 }
 
 const buttonStyle = {
@@ -34,17 +34,23 @@ const wrapperStyle = {
 }
 
 class ShoppingCartItem extends React.Component {
+    constructor(props) {
+        super(props)
+    };
+
     render() {
+        console.log("rendering items!")
         return(
             <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>
-                    <img src="./data/products/12064273040195392_2.jpg" style={iconStyle} class="ui mini image"/> 
+                    <img src={"./data/products/" + this.props.cartItemImg + "_1.jpg"} style={iconStyle} class="ui mini image"/> 
                     <div style={textWrapStyle}>
-                        <p style={pStyle}>Name of shirt</p>
+                        <p style={pStyle}>{this.props.cartItemTitle}</p>
                         <br/>
-                        <p style={pStyle}>Size</p>
+                        <p style={pStyle}>{this.props.cartItemSize}</p>
                         <br/>
-                        <p style={priceStyle}>2 x $10 = <b>$20</b></p>
+                        <br />
+                        <p style={priceStyle}>{this.props.cartItemPrice} = <b>$20</b></p>
                     </div>
                 </div>
                 <div style={buttonStyle}>
