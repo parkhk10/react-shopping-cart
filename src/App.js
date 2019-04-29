@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductContainer from './components/ProductContainer'
+import ShoppingCart from './components/ShoppingCart'
 
 const mainPageStyle = {
   textAlign: 'center'
@@ -8,6 +9,16 @@ const mainPageStyle = {
 const titleStyle = {
   marginBottom: '2em',
   marginTop: '1em'
+}
+
+const cartStyle = {
+  float: 'right',
+  marginLeft: '0px',
+}
+
+const productsStyle ={
+  float: 'left',
+  marginRight: '0px'
 }
 
 const App = ({products}) => {
@@ -25,7 +36,8 @@ const App = ({products}) => {
   return(
     <div style={mainPageStyle}>
       <h1 style={titleStyle}>Sick Tees Co.</h1>
-      <div class="ui grid">{items}</div>
+      <div style={cartStyle}><ShoppingCart /></div>
+      <div style={productsStyle} class="ui grid">{items}</div>
     </div>
     // <ProductContainer productTitle={items} />
   // <ul>{items}</ul>
