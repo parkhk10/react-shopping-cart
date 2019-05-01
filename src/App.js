@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductContainer from './components/ProductContainer'
 import ShoppingCart from './components/ShoppingCart'
 
@@ -50,19 +50,29 @@ const App = ({products}) => {
   }
 
   const callSetCart = () => {
-    setTimeout(5000)
-    setCart([...cart,
-      {
+    setTimeout(() => setCart(cart => [
+      ...cart,
+        {
         title : selectedTitle, 
         size : selectedSize,
         price : selectedPrice,
         img : selectedImg
       }
-    ]);
-    console.log(cart)
+    ]), 1000)
+    // setTimeout(() => console.log("this is what I chose: " + selectedTitle),
+    // 5000)
+    console.log("this is what I chose: " + selectedTitle)
+    // setTimeout(() => setCart([...cart,
+    //   {
+    //     title : selectedTitle, 
+    //     size : selectedSize,
+    //     price : selectedPrice,
+    //     img : selectedImg
+    //   }
+    // ]), 5000)
+  }
 
-  };
-
+ 
   
   const skus = Object.keys(products);
   const items = skus.map(
@@ -71,23 +81,24 @@ const App = ({products}) => {
               handleAddToCart={handleAddToCart.bind(this)}
             />
     );
-
-  return(
-    <div style={mainPageStyle}>
-      <h1 style={titleStyle}>Sick Tees Co.</h1>
-      <button onClick={() => toggleMenu(!menuVisibility)}>shopping cart</button> 
-      <div style={cartStyle}>
-        <ShoppingCart cartItemTitle={selectedTitle}
-                      cartItemSize={selectedSize}
-                      cartItemPrice={selectedPrice}
-                      cartItemImg={selectedImg} 
-                      cart={cart}
-                      visible={menuVisibility}
-        />
-      </div>
-      <div style={productsStyle} class="ui grid">{items}</div>
-    </div>
-  )
+      return(
+        <div style={mainPageStyle}>
+          <h1 style={titleStyle}>Sick Tees Co.</h1>
+          <button onClick={() => toggleMenu(!menuVisibility)}>shopping cart</button> 
+          <div style={cartStyle}>
+            <ShoppingCart 
+                          cart={cart}
+                          visible={menuVisibility}
+            />
+          </div>
+          <div style={productsStyle} class="ui grid">{items}</div>
+        </div>
+      )
 };
 
 export default App;
+
+// cartItemTitle={selectedTitle}
+//                           cartItemSize={selectedSize}
+//                           cartItemPrice={selectedPrice}
+//                           cartItemImg={selectedImg} 
