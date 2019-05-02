@@ -24,61 +24,18 @@ const productsStyle ={
 const App = ({products}) => {
 
   const [menuVisibility, toggleMenu] = useState(false); //TODO!!!!!!!
-  const [selectedTitle, setTitle] = useState("");
-  const [selectedSize, setSize] = useState("");
-  const [selectedPrice, setPrice] = useState("");
-  const [selectedImg, setImg] = useState("");
-  const [cart, setCart] = useState([]);
+  const [cartItems, setItem] = useState([]);
 
-  const handleAddToCart = (selectedProdInfo, size) => {
-    console.log("selected prod info" + selectedProdInfo)
-    // need to make cart open and add a ShoppingCartItem with the right details
-    setTitle(selectedProdInfo.title)
-    setSize(size)
-    setPrice(selectedProdInfo.price)
-    setImg(selectedProdInfo.sku)
-    callSetCart()
-    // setCart([...cart,
-    //           {
-    //             title : selectedTitle, 
-    //             size : selectedSize,
-    //             price : selectedPrice,
-    //             img : selectedImg
-    //           }
-    //         ]);
-    console.log(cart)
+  const addItem = (x) => {
+    // console.log("trying to add: " + Object.keys(x))
+    setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
   }
-
-  const callSetCart = () => {
-    setTimeout(() => setCart(cart => [
-      ...cart,
-        {
-        title : selectedTitle, 
-        size : selectedSize,
-        price : selectedPrice,
-        img : selectedImg
-      }
-    ]), 1000)
-    // setTimeout(() => console.log("this is what I chose: " + selectedTitle),
-    // 5000)
-    console.log("this is what I chose: " + selectedTitle)
-    // setTimeout(() => setCart([...cart,
-    //   {
-    //     title : selectedTitle, 
-    //     size : selectedSize,
-    //     price : selectedPrice,
-    //     img : selectedImg
-    //   }
-    // ]), 5000)
-  }
-
- 
   
   const skus = Object.keys(products);
   const items = skus.map(
     sku => <ProductContainer 
               productInfo={products[sku]}
-              handleAddToCart={handleAddToCart.bind(this)}
+              cart={{ cartItems, addItem }}
             />
     );
       return(
@@ -87,7 +44,7 @@ const App = ({products}) => {
           <button onClick={() => toggleMenu(!menuVisibility)}>shopping cart</button> 
           <div style={cartStyle}>
             <ShoppingCart 
-                          cart={cart}
+                          cart={cartItems}
                           visible={menuVisibility}
             />
           </div>
@@ -97,8 +54,3 @@ const App = ({products}) => {
 };
 
 export default App;
-
-// cartItemTitle={selectedTitle}
-//                           cartItemSize={selectedSize}
-//                           cartItemPrice={selectedPrice}
-//                           cartItemImg={selectedImg} 
