@@ -39,7 +39,6 @@ class ShoppingCartItem extends React.Component {
     };
 
     render() {
-        console.log("rendering items!")
         return(
             <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>

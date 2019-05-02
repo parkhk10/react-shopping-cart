@@ -38,12 +38,12 @@ const menuBarStyle = {
 // }
 
 function ShoppingCartFunc(props) {
-    const itemObjectArray = Object.values(props.cart)
-    const cartItems = itemObjectArray.map(
-        item => <ShoppingCartItem cartItemTitle={item.title}
-                    cartItemSize={item.size}
-                    cartItemPrice={item.price}
-                    cartItemImg={item.img} 
+    // const itemObjectArray = Object.values(props.cart)
+    const cartItems = props.cart.map(
+        item => <ShoppingCartItem cartItemTitle={item[0].title}
+                    cartItemSize={item[1]}
+                    cartItemPrice={item[0].price}
+                    cartItemImg={item[0].sku} 
                 />
         );
 
