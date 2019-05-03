@@ -51,6 +51,10 @@ const App = ({products}) => {
     }
   }
 
+  const deleteItem = (cart, idx) => {
+    console.log("made it to delete: " + cart)
+  }
+
   const skus = Object.keys(products);
   const items = skus.map(
     sku => <ProductContainer 
@@ -66,6 +70,7 @@ const App = ({products}) => {
             <ShoppingCart 
                           cart={cartItems}
                           visible={menuVisibility}
+                          cartDelete={{ cartItems, deleteItem }}
             />
           </div>
           <div style={productsStyle} class="ui grid">{items}</div>

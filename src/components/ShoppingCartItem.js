@@ -33,31 +33,51 @@ const wrapperStyle = {
     height: '62px'
 }
 
-class ShoppingCartItem extends React.Component {
-    constructor(props) {
-        super(props)
-    };
-
-    render() {
+function ShoppingCartItem({title, size, price, img, idx, cartDelete}) {
         return(
             <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>
-                    <img src={"./data/products/" + this.props.cartItemImg + "_1.jpg"} style={iconStyle} class="ui mini image"/> 
+                    <img src={"./data/products/" + img + "_1.jpg"} style={iconStyle} class="ui mini image"/> 
                     <div style={textWrapStyle}>
-                        <p style={pStyle}>{this.props.cartItemTitle}</p>
+                        <p style={pStyle}>{title}</p>
                         <br/>
-                        <p style={pStyle}>{this.props.cartItemSize}  //  <b>${this.props.cartItemPrice}</b></p>
+                        <p style={pStyle}>{size}  //  <b>${price}</b></p>
                         <br/>
                         <br />
                         {/* <p style={priceStyle}><b>${this.props.cartItemPrice}</b></p> */}
                     </div>
                 </div>
                 <div style={buttonStyle}>
-                    <button class="ui inverted red button">-</button>
+                    <button class="ui inverted red button" onClick={cartDelete.deleteItem(cartDelete.cartItems, idx)}>-</button>
                 </div>
             </div>
         )
-    }
 }
+// class ShoppingCartItem extends React.Component {
+//     constructor(props) {
+//         super(props)
+//     };
+
+//     render() {
+//         return(
+//             <div style={wrapperStyle}>
+//                 <div style={prodDetailWrapperStyle}>
+//                     <img src={"./data/products/" + this.props.cartItemImg + "_1.jpg"} style={iconStyle} class="ui mini image"/> 
+//                     <div style={textWrapStyle}>
+//                         <p style={pStyle}>{this.props.cartItemTitle}</p>
+//                         <br/>
+//                         <p style={pStyle}>{this.props.cartItemSize}  //  <b>${this.props.cartItemPrice}</b></p>
+//                         <br/>
+//                         <br />
+//                         {/* <p style={priceStyle}><b>${this.props.cartItemPrice}</b></p> */}
+//                     </div>
+//                 </div>
+//                 <div style={buttonStyle}>
+//                     <button class="ui inverted red button" onClick={console.log("this is the cart item index: " + this.props.cartItemIdx)}>-</button>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 export default ShoppingCartItem;

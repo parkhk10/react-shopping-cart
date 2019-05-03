@@ -37,19 +37,21 @@ const menuBarStyle = {
 //     }
 // }
 
-function ShoppingCartFunc(props) {
+function ShoppingCartFunc({cart, visible, cartDelete}) {
     // const itemObjectArray = Object.values(props.cart)
-    const cartItems = props.cart.map(
-        item => <ShoppingCartItem cartItemTitle={item[0].title}
-                    cartItemSize={item[1]}
-                    cartItemPrice={item[0].price}
-                    cartItemImg={item[0].sku} 
+    const cartItems = cart.map( // pass down the index so we can pick out which one to delete
+        (item, i) => <ShoppingCartItem title={item[0].title}
+                    size={item[1]}
+                    price={item[0].price}
+                    img={item[0].sku}
+                    idx={i}
+                    cartDelete={cartDelete} 
                     // quantity={}
                 />
         );
     var totalCost = 0;
-    for(var i = 0; i < props.cart.length; i++) {
-        totalCost = totalCost + props.cart[i][0].price
+    for(var i = 0; i < cart.length; i++) {
+        totalCost = totalCost + cart[i][0].price
     }
     console.log("total cost:" + totalCost)
     // const calcTotalCost = props.cart.map(
@@ -58,7 +60,7 @@ function ShoppingCartFunc(props) {
             return(
                 <Sidebar
                     style={menuBarStyle}
-                    visible= {props.visible}
+                    visible= {visible}
                     as={Menu}
                     animation='overlay'
                     direction='right'
@@ -69,7 +71,7 @@ function ShoppingCartFunc(props) {
                 >
                     <div class="item">
                          <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
-                         <p style={pStyle}>Shopping Cart: {props.cart.length} items</p>
+                         <p style={pStyle}>Shopping Cart: {cart.length} items</p>
                      </div>
                      {/* this is the part that needs to be mapped */}
                      <div class="item">{cartItems}</div>
