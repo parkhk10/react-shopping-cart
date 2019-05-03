@@ -26,11 +26,31 @@ const App = ({products}) => {
   const [menuVisibility, toggleMenu] = useState(false); //TODO!!!!!!!
   const [cartItems, setItem] = useState([]);
 
-  const addItem = (x) => {
-    // console.log("trying to add: " + Object.keys(x))
-    setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+  const modifyOrAdd = (x, anItem) => {
+    var currSKU = x[0].sku
+    var currSize = x[1]
+    if (anItem[0].sku == currSKU && anItem[1] == currSize) {
+      console.log("found duplicate")
+      anItem[2] = anItem[2] + 1 // just increment if a match is found
+    }
+    else {
+      console.log("concating")
+      setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+    }
   }
-  
+  const addItem = (x) => {
+    // var result = cartItems.filter(item => item[0].sku == currSKU && item[1] == currSize) // return any matching (duplicate) items in cart already
+    //setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+    if (cartItems.length == 0) {
+      setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+    }
+    else {
+      cartItems.map(
+        anItem => modifyOrAdd(x, anItem)
+      )
+    }
+  }
+
   const skus = Object.keys(products);
   const items = skus.map(
     sku => <ProductContainer 

@@ -15,9 +15,10 @@ function ProductContainer({ productInfo, cart }) {
     }
 
     const createSizeButtons = () => {
+        const quantity = 1
         return(
             productInfo.availableSizes.map(size => <button class="ui inverted violet button" 
-                                                        onClick={() => cart.addItem([productInfo, size])}>{size}
+                                                        onClick={() => cart.addItem([productInfo, size, quantity])}>{size}
                                                 </button>
             )
         )

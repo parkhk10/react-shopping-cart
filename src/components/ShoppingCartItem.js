@@ -46,10 +46,10 @@ class ShoppingCartItem extends React.Component {
                     <div style={textWrapStyle}>
                         <p style={pStyle}>{this.props.cartItemTitle}</p>
                         <br/>
-                        <p style={pStyle}>{this.props.cartItemSize}</p>
+                        <p style={pStyle}>{this.props.cartItemSize}  //  <b>${this.props.cartItemPrice}</b></p>
                         <br/>
                         <br />
-                        <p style={priceStyle}>{this.props.cartItemPrice} = <b>$20</b></p>
+                        {/* <p style={priceStyle}><b>${this.props.cartItemPrice}</b></p> */}
                     </div>
                 </div>
                 <div style={buttonStyle}>

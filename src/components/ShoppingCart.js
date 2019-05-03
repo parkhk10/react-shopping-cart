@@ -44,10 +44,17 @@ function ShoppingCartFunc(props) {
                     cartItemSize={item[1]}
                     cartItemPrice={item[0].price}
                     cartItemImg={item[0].sku} 
+                    // quantity={}
                 />
         );
-
-        if(props.cart.length == 0) {
+    var totalCost = 0;
+    for(var i = 0; i < props.cart.length; i++) {
+        totalCost = totalCost + props.cart[i][0].price
+    }
+    console.log("total cost:" + totalCost)
+    // const calcTotalCost = props.cart.map(
+    //     item => { totalCost = totalCost + item[0].price }
+    // )
             return(
                 <Sidebar
                     style={menuBarStyle}
@@ -62,56 +69,16 @@ function ShoppingCartFunc(props) {
                 >
                     <div class="item">
                          <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
-                         <p style={pStyle}>Shopping Cart: 0 items</p>
-                     </div>
-                     {/* this is the part that needs to be mapped */}
-                     {/* <div>{this.cartItemsRender}</div> */}
-                     {/* <div class="item">
-                         <ShoppingCartItem cartItemTitle={this.props.cartItemTitle}
-                                            cartItemSize={this.props.cartItemSize}
-                                            cartItemPrice={this.props.cartItemPrice}
-                                            cartItemImg={this.props.cartItemImg} 
-                          />
-                     </div> */}
-                     <div class="item">
-                         <h3>Total: $20</h3>
-                     </div>
-                </Sidebar>
-            )
-        }
-        else {
-            return(
-                <Sidebar
-                    style={menuBarStyle}
-                    visible= {props.visible}
-                    as={Menu}
-                    animation='overlay'
-                    direction='right'
-                    icon='labeled'
-                    // inverted
-                    vertical
-                    width='thin'
-                >
-                    <div class="item">
-                         <img style={iconStyle} class="ui mini image" src="./data/img/shopping_cart.png" />
-                         <p style={pStyle}>Shopping Cart: 0 items</p>
+                         <p style={pStyle}>Shopping Cart: {props.cart.length} items</p>
                      </div>
                      {/* this is the part that needs to be mapped */}
                      <div class="item">{cartItems}</div>
-                     {/* <div class="item">
-                         <ShoppingCartItem cartItemTitle={this.props.cartItemTitle}
-                                            cartItemSize={this.props.cartItemSize}
-                                            cartItemPrice={this.props.cartItemPrice}
-                                            cartItemImg={this.props.cartItemImg} 
-                          />
-                     </div> */}
                      <div class="item">
-                         <h3>Total: $20</h3>
+                         <h3>Total: ${totalCost}</h3>
                      </div>
                 </Sidebar>
             )
         }
-}
 
 class ShoppingCart extends React.Component {
     constructor(props) {
