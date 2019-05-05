@@ -33,7 +33,7 @@ const wrapperStyle = {
     height: '62px'
 }
 
-function ShoppingCartItem({title, size, price, img, idx, cartDelete}) {
+function ShoppingCartItem({title, size, price, img, timeStamp, cartDelete}) {
         return(
             <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>
@@ -48,7 +48,7 @@ function ShoppingCartItem({title, size, price, img, idx, cartDelete}) {
                     </div>
                 </div>
                 <div style={buttonStyle}>
-                    <button class="ui inverted red button" onClick={cartDelete.deleteItem(cartDelete.cartItems, idx)}>-</button>
+                    <button class="ui inverted red button" onClick={() => cartDelete.deleteItem(timeStamp)}>-</button>
                 </div>
             </div>
         )

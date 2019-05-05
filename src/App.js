@@ -38,21 +38,28 @@ const App = ({products}) => {
       setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
     }
   }
+  // const addItem = (x) => {
+  //   // var result = cartItems.filter(item => item[0].sku == currSKU && item[1] == currSize) // return any matching (duplicate) items in cart already
+  //   //setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+  //   if (cartItems.length == 0) {
+  //     setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
+  //   }
+  //   else {
+  //     cartItems.map(
+  //       anItem => modifyOrAdd(x, anItem)
+  //     )
+  //   }
+  // }
+
   const addItem = (x) => {
-    // var result = cartItems.filter(item => item[0].sku == currSKU && item[1] == currSize) // return any matching (duplicate) items in cart already
-    //setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
-    if (cartItems.length == 0) {
-      setItem(cartItems.concat([x])) //[[{}, size], [{}, size], [{}, size]]
-    }
-    else {
-      cartItems.map(
-        anItem => modifyOrAdd(x, anItem)
-      )
-    }
+    setItem(cartItems.concat([x])) //[[{}, size, timestamp], [{}, size, timestamp], [{}, size, timestamp]]
+    console.log("here's the item: " + Object.values(x))
   }
 
-  const deleteItem = (cart, idx) => {
-    console.log("made it to delete: " + cart)
+  const deleteItem = (timeStamp) => {
+    // console.log("made it to delete: " + cart)
+    setItem(cartItems.filter(item => item[2] != timeStamp))
+    // use filter and use timestamp as a key (get time javascript)
   }
 
   const skus = Object.keys(products);

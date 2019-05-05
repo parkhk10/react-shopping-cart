@@ -14,11 +14,16 @@ function ProductContainer({ productInfo, cart }) {
         return(newProdObject)
     }
 
+    const addItemWrapper = (productInfo, size) => {
+        var timeStamp = Date.now()
+        cart.addItem([productInfo, size, timeStamp])
+    }
+
     const createSizeButtons = () => {
         const quantity = 1
         return(
             productInfo.availableSizes.map(size => <button class="ui inverted violet button" 
-                                                        onClick={() => cart.addItem([productInfo, size, quantity])}>{size}
+                                                        onClick={() => addItemWrapper(productInfo, size)}>{size}
                                                 </button>
             )
         )
