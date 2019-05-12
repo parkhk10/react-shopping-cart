@@ -33,7 +33,11 @@ const wrapperStyle = {
     height: '62px'
 }
 
-function ShoppingCartItem({title, size, price, img, timeStamp, cartDelete}) {
+function ShoppingCartItem({title, size, price, img, timeStamp, cartDelete, inventory}) {
+    const deleteItemWrapper = (timeStamp) => {
+        cartDelete.deleteItem(timeStamp);
+        inventory.addToInventory(img, size)
+    }
         return(
             <div style={wrapperStyle}>
                 <div style={prodDetailWrapperStyle}>
@@ -48,36 +52,12 @@ function ShoppingCartItem({title, size, price, img, timeStamp, cartDelete}) {
                     </div>
                 </div>
                 <div style={buttonStyle}>
-                    <button class="ui inverted red button" onClick={() => cartDelete.deleteItem(timeStamp)}>-</button>
+                    <button class="ui inverted red button" onClick={() => deleteItemWrapper(timeStamp)}>-</button> 
                 </div>
             </div>
         )
 }
-// class ShoppingCartItem extends React.Component {
-//     constructor(props) {
-//         super(props)
-//     };
 
-//     render() {
-//         return(
-//             <div style={wrapperStyle}>
-//                 <div style={prodDetailWrapperStyle}>
-//                     <img src={"./data/products/" + this.props.cartItemImg + "_1.jpg"} style={iconStyle} class="ui mini image"/> 
-//                     <div style={textWrapStyle}>
-//                         <p style={pStyle}>{this.props.cartItemTitle}</p>
-//                         <br/>
-//                         <p style={pStyle}>{this.props.cartItemSize}  //  <b>${this.props.cartItemPrice}</b></p>
-//                         <br/>
-//                         <br />
-//                         {/* <p style={priceStyle}><b>${this.props.cartItemPrice}</b></p> */}
-//                     </div>
-//                 </div>
-//                 <div style={buttonStyle}>
-//                     <button class="ui inverted red button" onClick={console.log("this is the cart item index: " + this.props.cartItemIdx)}>-</button>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
+// need to implement a function that adds 1 to the count in inventory when - button is clicked!!!!
 
 export default ShoppingCartItem;

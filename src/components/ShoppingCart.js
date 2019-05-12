@@ -37,7 +37,7 @@ const menuBarStyle = {
 //     }
 // }
 
-function ShoppingCartFunc({cart, visible, cartDelete}) {
+function ShoppingCartFunc({cart, visible, cartDelete, inventory}) {
     // const itemObjectArray = Object.values(props.cart)
     const cartItems = cart.map( // pass down the index so we can pick out which one to delete
         (item) => <ShoppingCartItem title={item[0].title}
@@ -46,6 +46,7 @@ function ShoppingCartFunc({cart, visible, cartDelete}) {
                     img={item[0].sku}
                     timeStamp={item[2]}
                     cartDelete={cartDelete} 
+                    inventory={inventory}
                     // quantity={}
                 />
         );

@@ -4,7 +4,7 @@ const container = {
     textAlign: 'center',
 };
 
-function ProductContainer({ productInfo, cart }) {
+function ProductContainer({ productInfo, cart, inventory }) {
 
     const addSizeToProdObject = (prodObject, size) => {
         console.log("this is the selected product:" + Object.values(prodObject))
@@ -17,17 +17,33 @@ function ProductContainer({ productInfo, cart }) {
     const addItemWrapper = (productInfo, size) => {
         var timeStamp = Date.now()
         cart.addItem([productInfo, size, timeStamp])
+        inventory.changeInventory(productInfo.sku, size)
+    }
+
+    const buttonCreator = (itemInventory, size) => {
+        if (itemInventory[size] != 0) {
+            return(
+                <div class="ui right labeled button">
+                    <button class="ui icon button" 
+                            tabindex="0"
+                            onClick={() => addItemWrapper(productInfo, size)}>
+                        {size}
+                    </button>
+                    <a class="ui left pointing basic label">{itemInventory[size]}</a>
+                </div>
+            )
+        }
     }
 
     const createSizeButtons = () => {
         const quantity = 1
+        const itemInventory = inventory.availableSizes["inventory"][productInfo.sku]
         return(
-            productInfo.availableSizes.map(size => <button class="ui inverted violet button" 
-                                                        onClick={() => addItemWrapper(productInfo, size)}>{size}
-                                                </button>
+            Object.keys(itemInventory).map((size, i) =>  buttonCreator(itemInventory, size) 
             )
         )
     }
+    
     return(
         <div style={container}>
             <img src={"./data/products/" + productInfo.sku + "_1.jpg"} />

@@ -23,8 +23,25 @@ const productsStyle ={
 
 const App = ({products}) => {
 
+  // set states
   const [menuVisibility, toggleMenu] = useState(false); //TODO!!!!!!!
   const [cartItems, setItem] = useState([]);
+
+  const fetchJson= () => {
+    // fetch data from local file
+    // TODO: In the future, the data would be fetched from Prof.Riesbeck's server
+    let json = require('./inventory.json');
+    return json;
+  }
+
+  const [availableSizes, setInventory] = useState(fetchJson())
+  
+//   fetch('./data/inventory.json/')
+//     .then(resp => resp.json()) 
+//     .then(({inventoryFetched}) => {
+//       console.log("fetched!")
+//       // const [inventory, setInventory] = useState(inventoryFetched)
+// });
 
   const modifyOrAdd = (x, anItem) => {
     var currSKU = x[0].sku
@@ -51,6 +68,22 @@ const App = ({products}) => {
   //   }
   // }
 
+  const changeInventory = (sku, selectedSize) => {
+    // takes the sku and size and updates the inventory json file accordingly. 
+    // triggered when user clicks on the item button on ProductContainer.js
+    const currInStock = availableSizes["inventory"][sku][selectedSize]
+    console.log("this is the current in stock: " + currInStock)
+    availableSizes["inventory"][sku][selectedSize] = currInStock-1
+  }
+
+  const addToInventory = (sku, selectedSize) => {
+    // takes the sku and size and updates the inventory json file accordingly. 
+    // triggered when user clicks on the delete button from the shopping cart
+    const currInStock = availableSizes["inventory"][sku][selectedSize]
+    console.log("this is the current in stock: " + currInStock)
+    availableSizes["inventory"][sku][selectedSize] = currInStock+1
+  }
+
   const addItem = (x) => {
     setItem(cartItems.concat([x])) //[[{}, size, timestamp], [{}, size, timestamp], [{}, size, timestamp]]
     console.log("here's the item: " + Object.values(x))
@@ -67,6 +100,7 @@ const App = ({products}) => {
     sku => <ProductContainer 
               productInfo={products[sku]}
               cart={{ cartItems, addItem }}
+              inventory={{ availableSizes, changeInventory }}
             />
     );
       return(
@@ -78,6 +112,7 @@ const App = ({products}) => {
                           cart={cartItems}
                           visible={menuVisibility}
                           cartDelete={{ cartItems, deleteItem }}
+                          inventory={{ availableSizes, addToInventory }}
             />
           </div>
           <div style={productsStyle} class="ui grid">{items}</div>
