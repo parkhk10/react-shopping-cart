@@ -105,7 +105,7 @@ const App = ({products}) => {
     );
       return(
         <div style={mainPageStyle}>
-          <h1 style={titleStyle}>Sick Tees Co.</h1>
+          <h1 style={titleStyle}>Blah Blah Tees Co.</h1>
           <button onClick={() => toggleMenu(!menuVisibility)}>shopping cart</button> 
           <div style={cartStyle}>
             <ShoppingCart 
